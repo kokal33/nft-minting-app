@@ -10,13 +10,15 @@ const truncate = (input, len) =>
 
 export const StyledButton = styled.button`
   padding: 10px;
-  border-radius: 50px;
+  border-radius: 10px;
   border: none;
   background-color: var(--secondary);
   padding: 10px;
   font-weight: bold;
+  font-size:20px;
   color: var(--secondary-text);
-  width: 100px;
+  width: 200px;
+  height:50px;
   cursor: pointer;
   box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
   -webkit-box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
@@ -60,6 +62,7 @@ export const ResponsiveWrapper = styled.div`
   justify-content: stretched;
   align-items: stretched;
   width: 40%;
+  }
   @media (min-width: 767px) {
     flex-direction: row;
   }
@@ -90,7 +93,7 @@ export const StyledImg = styled.img`
 `;
 
 export const StyledLink = styled.a`
-  color: var(--secondary);
+  color: #f9a3b6;
   text-decoration: none;
 `;
 
@@ -212,6 +215,7 @@ function App() {
                   style={{ textAlign: "center", color: "black" }}>
                   NFT Pre-Sale
                 </s.TextTitle>
+
         <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
           <s.Container
             flex={2}
@@ -234,6 +238,7 @@ function App() {
                 {truncate(CONFIG.CONTRACT_ADDRESS, 15)}
               </StyledLink>
             </s.TextDescription>
+            <s.SpacerLarge></s.SpacerLarge>
             <span
               style={{
                 textAlign: "center",
@@ -245,13 +250,15 @@ function App() {
                 }}
                 style={{
                   margin: "5px",
+                  backgroundColor:"#a894f0"
                 }}
               >
-                Roadmap
+                ROADMAP
               </StyledButton>
               <StyledButton
                 style={{
                   margin: "5px",
+                  backgroundColor:"#b0c9f8"
                 }}
                 onClick={(e) => {
                   window.open(CONFIG.MARKETPLACE_LINK, "_blank");
@@ -305,7 +312,7 @@ function App() {
                       Connect to the {CONFIG.NETWORK.NAME} network
                     </s.TextDescription>
                     <s.SpacerSmall />
-                    <StyledButton
+                    <StyledButton style={{backgroundColor:"black"}}
                       onClick={(e) => {
                         e.preventDefault();
                         dispatch(connect());
