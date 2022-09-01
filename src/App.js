@@ -54,21 +54,20 @@ export const StyledRoundButton = styled.button`
 `;
 
 export const ResponsiveWrapper = styled.div`
-  display: flex;
-  flex: 1;
+  
   flex-direction: column;
   justify-content: stretched;
   align-items: stretched;
-  width: 100%;
+  width: 30%;
   @media (min-width: 767px) {
     flex-direction: row;
   }
 `;
 
 export const StyledLogo = styled.img`
-  width: 200px;
+  width: 350px;
   @media (min-width: 767px) {
-    width: 300px;
+    width: 450px;
   }
   transition: width 0.5s;
   transition: height 0.5s;
@@ -112,12 +111,14 @@ function App() {
     NFT_NAME: "",
     SYMBOL: "",
     MAX_SUPPLY: 1,
+    MAX_MINT:1,
     WEI_COST: 0,
     DISPLAY_COST: 0,
     GAS_LIMIT: 0,
     MARKETPLACE: "",
     MARKETPLACE_LINK: "",
     SHOW_BACKGROUND: false,
+    MAINNET:false
   });
 
   const claimNFTs = () => {
@@ -162,8 +163,8 @@ function App() {
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 50) {
-      newMintAmount = 50;
+    if (newMintAmount > CONFIG.MAX_MINT) {
+      newMintAmount = CONFIG.MAX_MINT;
     }
     setMintAmount(newMintAmount);
   };
@@ -202,36 +203,26 @@ function App() {
         image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
       >
         <a href={CONFIG.MARKETPLACE_LINK}>
-          <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
+          <StyledLogo alt={"logo"} src={"/config/images/logo_charify.svg"} />
         </a>
+       
         <s.SpacerSmall />
+        <s.TextTitle
+                  style={{ textAlign: "center", color: "black" }}>
+                  NFT Pre-Sale
+                </s.TextTitle>
         <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
-          <s.Container flex={1} jc={"center"} ai={"center"}>
-            <StyledImg alt={"example"} src={"/config/images/example.gif"} />
-          </s.Container>
-          <s.SpacerLarge />
           <s.Container
             flex={2}
             jc={"center"}
             ai={"center"}
             style={{
               backgroundColor: "var(--accent)",
-              padding: 24,
-              borderRadius: 24,
-              border: "4px dashed var(--secondary)",
+              padding: 20,
+              borderRadius: 20,
               boxShadow: "0px 5px 11px 2px rgba(0,0,0,0.7)",
             }}
           >
-            <s.TextTitle
-              style={{
-                textAlign: "center",
-                fontSize: 50,
-                fontWeight: "bold",
-                color: "var(--accent-text)",
-              }}
-            >
-              {data.totalSupply} / {CONFIG.MAX_SUPPLY}
-            </s.TextTitle>
             <s.TextDescription
               style={{
                 textAlign: "center",
@@ -249,7 +240,7 @@ function App() {
             >
               <StyledButton
                 onClick={(e) => {
-                  window.open("/config/roadmap.pdf", "_blank");
+                  window.open("https://xd.adobe.com/view/3e428c07-4ab0-40e1-9838-2fab2a2f1dd5-6b11", "_blank");
                 }}
                 style={{
                   margin: "5px",
@@ -322,6 +313,18 @@ function App() {
                     >
                       CONNECT
                     </StyledButton>
+                    <s.SpacerLarge />
+            <s.TextTitle
+              style={{
+                textAlign: "center",
+                fontSize: 50,
+                fontWeight: "bold",
+                color: "var(--accent-text)",
+              }}
+            >
+              {data.totalSupply} / {CONFIG.MAX_SUPPLY}
+            </s.TextTitle>
+
                     {blockchain.errorMsg !== "" ? (
                       <>
                         <s.SpacerSmall />
@@ -333,6 +336,7 @@ function App() {
                         >
                           {blockchain.errorMsg}
                         </s.TextDescription>
+                        
                       </>
                     ) : null}
                   </s.Container>
@@ -398,13 +402,7 @@ function App() {
             <s.SpacerMedium />
           </s.Container>
           <s.SpacerLarge />
-          <s.Container flex={1} jc={"center"} ai={"center"}>
-            <StyledImg
-              alt={"example"}
-              src={"/config/images/example.gif"}
-              style={{ transform: "scaleX(-1)" }}
-            />
-          </s.Container>
+
         </ResponsiveWrapper>
         <s.SpacerMedium />
         <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>

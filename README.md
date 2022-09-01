@@ -63,7 +63,8 @@ Note: this dapp is designed to work with the intended NFT smart contract, that o
   "GAS_LIMIT": 285000,
   "MARKETPLACE": "Opeansea",
   "MARKETPLACE_LINK": "https://opensea.io/collection/the-stripes-nft",
-  "SHOW_BACKGROUND": true
+  "SHOW_BACKGROUND": true,
+  "MAINNET":true
 }
 ```
 

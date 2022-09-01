@@ -8,11 +8,13 @@
   },
   "NFT_NAME": "Charify NFT",
   "SYMBOL": "TSNFT",
-  "MAX_SUPPLY": 992,
+  "MAX_SUPPLY": 100,
+  "MAX_MINT":2,
   "WEI_COST": 4000000000000000000,
   "DISPLAY_COST": 4,
   "GAS_LIMIT": 285000,
   "MARKETPLACE": "Opeansea",
   "MARKETPLACE_LINK": "https://opensea.io/collection/the-stripes-nft",
-  "SHOW_BACKGROUND": true
+  "SHOW_BACKGROUND": true,
+  "MAINNET": true
 }
