@@ -1,6 +1,8 @@
 # Logs
 
 logs
+jsonParser/metadataParsed
+
 _.log
 npm-debug.log_
 yarn-debug.log*

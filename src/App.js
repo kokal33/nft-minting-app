@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { connect } from "./redux/blockchain/blockchainActions";
-import { fetchData } from "./redux/data/dataActions";
+import { fetchData, totalSupply } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
 
@@ -174,6 +174,8 @@ function App() {
   };
 
   const getData = () => {
+    if (blockchain.account == null)
+      dispatch(totalSupply());
     if (blockchain.account !== "" && blockchain.smartContract !== null) {
       dispatch(fetchData(blockchain.account));
     }
@@ -197,6 +199,7 @@ function App() {
   useEffect(() => {
     getData();
   }, [blockchain.account]);
+  
 
   return (
     <s.Screen>
@@ -246,7 +249,7 @@ function App() {
             >
               <StyledButton
                 onClick={(e) => {
-                  window.open("https://xd.adobe.com/view/3e428c07-4ab0-40e1-9838-2fab2a2f1dd5-6b11", "_blank");
+                  window.open("https://charify.art/#Roadmap");
                 }}
                 style={{
                   margin: "5px",
@@ -290,7 +293,7 @@ function App() {
                 <s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
-                  1 {CONFIG.SYMBOL} costs {CONFIG.DISPLAY_COST}{" "}
+                  1 NFT costs {CONFIG.DISPLAY_COST}{" "}
                   {CONFIG.NETWORK.SYMBOL}.
                 </s.TextTitle>
                 <s.SpacerXSmall />
@@ -393,6 +396,7 @@ function App() {
                     <s.SpacerSmall />
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
                       <StyledButton
+                      style={{backgroundColor:"black"}}
                         disabled={claimingNft ? 1 : 0}
                         onClick={(e) => {
                           e.preventDefault();
@@ -400,9 +404,20 @@ function App() {
                           getData();
                         }}
                       >
-                        {claimingNft ? "BUSY" : "BUY"}
+                        {claimingNft ? "BUSY" : "MINT"}
                       </StyledButton>
                     </s.Container>
+                    <s.TextTitle
+              style={{
+                textAlign: "center",
+                fontSize: 50,
+                fontWeight: "bold",
+                color: "var(--accent-text)",
+              }}
+            >
+              {data.totalSupply} / {CONFIG.MAX_SUPPLY}
+            </s.TextTitle>
+
                   </>
                 )}
               </>
@@ -421,7 +436,7 @@ function App() {
             }}
           >
             Please make sure you are connected to the right network (
-            {CONFIG.NETWORK.NAME} Mainnet) and the correct address. Please note:
+            {CONFIG.NETWORK.NAME}) and the correct address. Please note:
             Once you make the purchase, you cannot undo this action.
           </s.TextDescription>
           <s.SpacerSmall />

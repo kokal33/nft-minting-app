@@ -1,5 +1,8 @@
 // log
 import store from "../store";
+import Web3 from "web3";
+import Web3EthContract from "web3-eth-contract";
+
 
 const fetchDataRequest = () => {
   return {
@@ -20,6 +23,45 @@ const fetchDataFailed = (payload) => {
     payload: payload,
   };
 };
+
+export const totalSupply = () => {
+  return async (dispatch) => {
+    dispatch(fetchDataRequest());
+    try {
+      const { ethereum } = window;
+      let web3 = new Web3(ethereum);
+      Web3EthContract.setProvider(ethereum);
+
+      const configResponse = await fetch("/config/testConfig.json", {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      });
+      const CONFIG = await configResponse.json();
+      const abiResponse = await fetch("/config/abi.json", {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      });
+      const abi = await abiResponse.json();
+      const SmartContractObj = new Web3EthContract(
+        abi,
+        CONFIG.CONTRACT_ADDRESS
+      );
+      let totalSupply =  await SmartContractObj.methods.totalSupply().call();
+      dispatch(
+        fetchDataSuccess({
+          totalSupply,
+        })
+      );
+    } catch (err) {
+      console.log(err);
+      dispatch(fetchDataFailed("Could not load data from contract."));
+    }
+  };
+}
 
 export const fetchData = () => {
   return async (dispatch) => {
