@@ -32,7 +32,7 @@ export const totalSupply = () => {
       let web3 = new Web3(ethereum);
       Web3EthContract.setProvider(ethereum);
 
-      const configResponse = await fetch("/config/testConfig.json", {
+      const configResponse = await fetch("/config/config.json", {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
