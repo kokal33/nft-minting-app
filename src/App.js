@@ -69,9 +69,10 @@ export const ResponsiveWrapper = styled.div`
 `;
 
 export const StyledLogo = styled.img`
-  width: 350px;
-  @media (min-width: 767px) {
-    width: 450px;
+  padding-right:30px;  
+  width: 150px;
+  @media (min-width: 567px) {
+    width: 250px;
   }
   transition: width 0.5s;
   transition: height 0.5s;
@@ -206,7 +207,7 @@ function App() {
       <s.Container
         flex={1}
         ai={"center"}
-        style={{ padding: 24, backgroundColor: "var(--primary)" }}
+        style={{ padding: 14, backgroundColor: "var(--primary)" }}
         image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
       >
         <a href={CONFIG.MARKETPLACE_LINK}>
@@ -219,7 +220,7 @@ function App() {
                   NFT Pre-Sale
                 </s.TextTitle>
 
-        <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
+        <ResponsiveWrapper flex={1} style={{ padding: 14 }} test>
           <s.Container
             flex={2}
             jc={"center"}
